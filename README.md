@@ -11,32 +11,6 @@ A full-stack web application for object detection using YOLOv5, built with React
 - **Side-by-side Comparison**: View original and detected images together
 - **Error Handling**: Comprehensive error handling and user feedback
 
-## 🚀 Quick Start for GitHub & Vercel
-
-### 1. Initialize Git and Push to GitHub
-
-```bash
-cd object-detection-app
-# Initialize git if not already
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-git push -u origin main
-```
-
-### 2. Deploy Frontend to Vercel
-- Go to [vercel.com](https://vercel.com/)
-- Import your GitHub repo
-- Set the project root to `object-detection-app/frontend`
-- Set build command: `npm run build`
-- Set output directory: `build`
-- Deploy!
-
-### 3. Backend Deployment
-- Vercel is for frontend only. For backend (Express + YOLOv5), use [Render](https://render.com/), [Railway](https://railway.app/), or your own VPS.
-- Make sure to update the frontend API URL to point to your backend deployment (use `.env` in frontend).
 
 ## 📁 Project Structure
 
