@@ -206,3 +206,5 @@ Feel free to submit issues and enhancement requests!
 ## 📞 Support
 
 If you encounter any issues, please check the troubleshooting section above or create an issue in the repository. 
+![Screenshot 2025-06-30 103044](https://github.com/user-attachments/assets/787fecfd-36ea-4479-a8b4-23e2cbb0ba5d)
+![Screenshot 2025-06-30 103031](https://github.com/user-attachments/assets/78d4292f-5bc4-4bcd-994f-f1e03f17d064)
