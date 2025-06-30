@@ -2,6 +2,15 @@
 
 A full-stack web application for object detection using YOLOv5, built with React (frontend) and Express.js (backend).
 
+
+# Backend development
+npm run dev
+
+# Frontend development
+cd frontend
+npm start
+
+
 ## 🚀 Features
 
 - **Modern UI**: Beautiful, responsive React frontend with smooth animations
@@ -52,18 +61,7 @@ Upload an image for object detection.
 }
 ```
 
-### Development Commands
-
-```bash
-# Backend development with auto-restart
-npm run dev
-
-# Frontend development
-cd frontend
-npm start
-
  
-
 ![Screenshot 2025-06-30 103031](https://github.com/user-attachments/assets/78d4292f-5bc4-4bcd-994f-f1e03f17d064)
 
 ![Screenshot 2025-06-30 103044](https://github.com/user-attachments/assets/787fecfd-36ea-4479-a8b4-23e2cbb0ba5d)
