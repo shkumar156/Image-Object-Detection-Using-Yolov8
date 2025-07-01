@@ -60,8 +60,11 @@ Upload an image for object detection.
   "message": "Object detection completed successfully"
 }
 ```
-
+## 📝 Results
  
 ![Screenshot 2025-06-30 103031](https://github.com/user-attachments/assets/78d4292f-5bc4-4bcd-994f-f1e03f17d064)
 
 ![Screenshot 2025-06-30 103044](https://github.com/user-attachments/assets/787fecfd-36ea-4479-a8b4-23e2cbb0ba5d)
+
+![Screenshot 2025-07-01 080722](https://github.com/user-attachments/assets/f805ef2e-3727-4f61-8d83-cd6c96433db9)
+
