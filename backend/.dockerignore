@@ -1,0 +1,10 @@
+runs
+uploads
+__pycache__
+*.pyc
+.git
+node_modules
+npm-debug.log
+.DS_Store
+frontend
+CatBreeds.ipynb 
