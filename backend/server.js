@@ -18,6 +18,9 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use('/detected', express.static(path.join(__dirname, '../runs/detect')));
 
+// Serve detection results as static files
+app.use('/results', express.static('/data/runs/detect'));
+
 // Configure multer for file uploads
 const uploadDir = '/data/uploads';
 const storage = multer.diskStorage({
@@ -187,76 +190,54 @@ app.post('/upload', upload.single('image'), async (req, res) => {
   }
 });
 
-// Function to run YOLOv5 detection
+// Function to run YOLOv5 detection using Ultralytics API
 async function runYOLOv5Detection(imagePath) {
   return new Promise((resolve) => {
-    const yolov5Path = path.join(__dirname, 'detect.py');
-    const weightsPath = path.join(__dirname, 'yolov5s.pt');
-    
-    console.log('Running YOLOv5 detection...');
-    console.log('Image path:', imagePath);
-    console.log('YOLOv5 script path:', yolov5Path);
-    console.log('Weights path:', weightsPath);
+    const yolov5Path = path.join(__dirname, 'yolo_detect.py');
+    const weightsPath = path.join(__dirname, 'yolov5su.pt'); // Use the 'u' model
+
+    console.log('Calling yolo_detect.py with weights:', weightsPath, 'and image:', imagePath);
 
     const pythonProcess = spawn('python', [
       yolov5Path,
-      '--weights', weightsPath,
-      '--source', imagePath,
-      '--project', path.join(__dirname, '../runs/detect'),
-      '--name', 'exp',
-      '--exist-ok'
+      weightsPath,
+      imagePath,
     ]);
 
-    let stdout = '';
-    let stderr = '';
+    let output = '';
+    let errorOutput = '';
 
     pythonProcess.stdout.on('data', (data) => {
-      stdout += data.toString();
-      console.log('YOLOv5 output:', data.toString());
+      output += data.toString();
+      console.log('PYTHON STDOUT:', data.toString());
     });
 
     pythonProcess.stderr.on('data', (data) => {
-      stderr += data.toString();
-      console.error('YOLOv5 error:', data.toString());
+      errorOutput += data.toString();
+      console.error('PYTHON STDERR:', data.toString());
     });
 
     pythonProcess.on('close', (code) => {
-      console.log('YOLOv5 process exited with code:', code);
-      
+      console.log('Python process exited with code:', code);
       if (code === 0) {
-        // Find the detected image in the runs/detect/exp directory
-        const expDir = path.join(__dirname, '../runs/detect/exp');
-        const detectedImagePath = findDetectedImage(expDir, path.basename(imagePath));
-        
-        if (detectedImagePath) {
-          // Get just the filename for the URL
-          const detectedImageFilename = path.basename(detectedImagePath);
-          console.log('Detected image filename:', detectedImageFilename);
-          
-          resolve({
-            success: true,
-            detectedImagePath: `/detected/exp/${detectedImageFilename}`
-          });
-        } else {
-          resolve({
-            success: false,
-            error: 'Detection completed but result image not found'
-          });
+        // Extract the last non-empty line from output as the detected image path
+        const lines = output.trim().split('\n');
+        const lastLine = lines.reverse().find(line => line.trim().endsWith('.jpg'));
+        let detectedImageUrl = null;
+        if (lastLine) {
+          const detectedImageFilename = path.basename(lastLine);
+          detectedImageUrl = `/results/predict/${detectedImageFilename}`;
         }
+        resolve({
+          success: true,
+          detectedImagePath: detectedImageUrl,
+        });
       } else {
         resolve({
           success: false,
-          error: `YOLOv5 detection failed with code ${code}: ${stderr}`
+          error: errorOutput || `YOLOv5 detection failed with code ${code}`,
         });
       }
-    });
-
-    pythonProcess.on('error', (error) => {
-      console.error('Failed to start YOLOv5 process:', error);
-      resolve({
-        success: false,
-        error: `Failed to start YOLOv5 process: ${error.message}`
-      });
     });
   });
 }
