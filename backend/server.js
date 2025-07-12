@@ -6,7 +6,7 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 7860;
 
 // Middleware
 app.use(cors());
@@ -306,7 +306,7 @@ app.use((error, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
   console.log(`Upload directory: ${path.join(__dirname, 'uploads')}`);
   console.log(`Detected images served from: ${path.join(__dirname, '../runs/detect')}`);
   console.log(`Static file serving configured for /detected -> ${path.join(__dirname, '../runs/detect')}`);
