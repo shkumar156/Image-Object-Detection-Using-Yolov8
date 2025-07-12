@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
-// Use environment variable for API base URL, fallback to Hugging Face Space URL
-const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'https://shkumar156-backend-object-detection.hf.space:7860';
+// Use environment variable for API base URL, fallback to Hugging Face Space URL (no port)
+const API_BASE_URL = process.env.REACT_APP_BACKEND_URL || 'https://shkumar156-backend-object-detection.hf.space';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
