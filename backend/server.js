@@ -46,7 +46,85 @@ const upload = multer({
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ message: 'Object Detection API is running!' });
+  // Check if the request wants HTML or JSON
+  const acceptHeader = req.headers.accept || '';
+  
+  if (acceptHeader.includes('text/html')) {
+    // Send HTML response for browser viewing
+    res.send(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Backend Status</title>
+          <style>
+              body {
+                  font-family: Arial, sans-serif;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  height: 100vh;
+                  margin: 0;
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  color: white;
+              }
+              .container {
+                  text-align: center;
+                  padding: 2rem;
+                  background: rgba(255, 255, 255, 0.1);
+                  border-radius: 15px;
+                  backdrop-filter: blur(10px);
+                  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+              }
+              h1 {
+                  font-size: 3rem;
+                  margin-bottom: 1rem;
+                  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+              }
+              .status {
+                  font-size: 1.5rem;
+                  margin-bottom: 1rem;
+                  color: #90EE90;
+              }
+              .info {
+                  font-size: 1rem;
+                  opacity: 0.8;
+              }
+              .timestamp {
+                  font-size: 0.9rem;
+                  opacity: 0.6;
+                  margin-top: 2rem;
+              }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h1>🚀 Backend Running!</h1>
+              <div class="status">✅ Object Detection API is Active</div>
+              <div class="info">
+                  <p>Port: ${PORT}</p>
+                  <p>Environment: ${process.env.NODE_ENV || 'development'}</p>
+                  <p>Upload Endpoint: POST /upload</p>
+                  <p>Test Endpoint: GET /test-detected</p>
+              </div>
+              <div class="timestamp">
+                  Started at: ${new Date().toLocaleString()}
+              </div>
+          </div>
+      </body>
+      </html>
+    `);
+  } else {
+    // Send JSON response for API calls
+    res.json({ 
+      message: 'Backend Running!',
+      status: 'active',
+      port: PORT,
+      environment: process.env.NODE_ENV || 'development',
+      timestamp: new Date().toISOString()
+    });
+  }
 });
 
 // Test endpoint to check if detected images are accessible
