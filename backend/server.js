@@ -186,8 +186,8 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 // Function to run YOLOv5 detection
 async function runYOLOv5Detection(imagePath) {
   return new Promise((resolve) => {
-    const yolov5Path = path.join(__dirname, '../detect.py');
-    const weightsPath = path.join(__dirname, '../yolov5s.pt');
+    const yolov5Path = path.join(__dirname, 'detect.py');
+    const weightsPath = path.join(__dirname, 'yolov5s.pt');
     
     console.log('Running YOLOv5 detection...');
     console.log('Image path:', imagePath);
