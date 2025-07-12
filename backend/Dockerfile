@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+# Ensure /data/uploads exists and is writable
+RUN mkdir -p /data/uploads && chmod -R 777 /data
+
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
