@@ -9,7 +9,11 @@ const app = express();
 const PORT = process.env.PORT || 7860;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: 'https://image-object-detection-using-yolov5.vercel.app',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use('/detected', express.static(path.join(__dirname, '../runs/detect')));
