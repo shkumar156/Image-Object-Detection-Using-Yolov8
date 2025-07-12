@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import './App.css';
 
-const API_BASE_URL = 'http://localhost:5000';
+// Use environment variable for API base URL, fallback to localhost for local dev
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 function App() {
   const [selectedFile, setSelectedFile] = useState(null);
