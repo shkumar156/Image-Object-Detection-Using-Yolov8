@@ -139,6 +139,7 @@ function App() {
               </button>
             </div>
             {error && <div className="error-message">{error}</div>}
+            }
           </div>
 
           {/* Detection Result Card */}
