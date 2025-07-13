@@ -564,10 +564,15 @@ input[type="file"] {
   .App-main {
     padding: 1rem 0.5rem;
   }
+  .card-container {
+    align-items: stretch;
+  }
   .card {
     padding: 0.7rem;
     border-radius: 10px;
-    min-height: 0;
+    min-height: 350px;
+    padding-bottom: 2.5rem;
+    box-sizing: border-box;
   }
   .card-title {
     font-size: 0.75rem;
