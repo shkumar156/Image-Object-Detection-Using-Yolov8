@@ -194,7 +194,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 async function runYOLOv5Detection(imagePath) {
   return new Promise((resolve) => {
     const yolov5Path = path.join(__dirname, 'yolo_detect.py');
-    const weightsPath = path.join(__dirname, 'yolov5su.pt'); // Use the 'u' model
+         const weightsPath = '/tmp/yolov8s.pt';
 
     console.log('Calling yolo_detect.py with weights:', weightsPath, 'and image:', imagePath);
 
