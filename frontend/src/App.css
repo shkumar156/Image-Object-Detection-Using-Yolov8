@@ -12,6 +12,9 @@ body {
   min-height: 100vh;
   color: #e4e4e7;
   overflow-x: hidden;
+  /* Safe area support for notched devices */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 .App {
@@ -19,6 +22,9 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+  /* Safe area support */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Animated background particles */
@@ -38,7 +44,7 @@ body {
 
 /* Header Section */
 .App-header {
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 2rem 1rem 1.5rem 1rem;
   text-align: center;
   position: relative;
   background: linear-gradient(180deg, rgba(18, 18, 18, 0.9) 0%, rgba(30, 30, 30, 0.7) 100%);
@@ -64,9 +70,9 @@ body {
 }
 
 .App-header h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.8rem, 6vw, 4rem);
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   background: linear-gradient(135deg, #00d4ff 0%, #ff00ff 50%, #00ff88 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -74,15 +80,19 @@ body {
   text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
   letter-spacing: -0.02em;
   line-height: 1.1;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .App-header p {
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 3vw, 1.2rem);
   color: #a1a1aa;
   font-weight: 400;
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  padding: 0 1rem;
+  word-wrap: break-word;
 }
 
 /* Main Content */
@@ -93,27 +103,26 @@ body {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 1rem;
   position: relative;
 }
 
 .card-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  height: 100%; /* NEW: take full height */
-  min-height: 500px; /* NEW: ensure enough height for centering */
+  min-height: 400px;
 }
 
 .card {
   background: linear-gradient(145deg, rgba(24, 24, 27, 0.8) 0%, rgba(39, 39, 42, 0.6) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 16px;
   backdrop-filter: blur(20px);
-  padding: 2rem;
+  padding: 1.5rem;
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -121,11 +130,11 @@ body {
     0 4px 20px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.05),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  display: flex; /* NEW: flexbox for vertical centering */
-  flex-direction: column; /* NEW: stack children vertically */
-  align-items: center; /* NEW: center horizontally */
-  justify-content: center; /* NEW: center vertically */
-  min-height: 400px; /* NEW: ensure enough height for centering */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
 }
 
 .card::before {
@@ -139,7 +148,7 @@ body {
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
   border-color: rgba(0, 212, 255, 0.3);
   box-shadow: 
     0 8px 40px rgba(0, 0, 0, 0.4),
@@ -151,43 +160,43 @@ body {
 .card-title {
   color: #00d4ff;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: clamp(0.75rem, 2vw, 0.9rem);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: 1.5rem;
-  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  padding: 0.4rem 0.8rem;
   background: rgba(0, 212, 255, 0.1);
   border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 8px;
+  border-radius: 6px;
   display: inline-block;
   font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Upload Section */
-.upload-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .drop-area {
   border: 2px dashed rgba(0, 212, 255, 0.3);
-  border-radius: 16px;
+  border-radius: 12px;
   background: linear-gradient(145deg, rgba(15, 15, 15, 0.8) 0%, rgba(30, 30, 30, 0.4) 100%);
   color: #a1a1aa;
-  padding: 3rem 2rem;
+  padding: 2rem 1rem;
   text-align: center;
   cursor: pointer;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  max-width: 100%;
 }
 
 .drop-area::before {
@@ -204,8 +213,8 @@ body {
 .drop-area:hover {
   border-color: rgba(0, 212, 255, 0.6);
   background: linear-gradient(145deg, rgba(0, 212, 255, 0.05) 0%, rgba(30, 30, 30, 0.6) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.15);
 }
 
 .drop-area:hover::before {
@@ -213,22 +222,26 @@ body {
 }
 
 .drop-area .upload-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.75rem;
   color: #00d4ff;
   filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
 }
 
 .drop-area .upload-text {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
   font-weight: 500;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   color: #e4e4e7;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .drop-area .upload-subtext {
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
   color: #71717a;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 input[type="file"] {
@@ -237,37 +250,42 @@ input[type="file"] {
 
 .preview-image, .result-image {
   max-width: 100%;
-  max-height: 300px;
-  border-radius: 12px;
-  margin: 1rem 0;
+  max-height: 250px;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  margin: 0.75rem 0;
   box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.3),
+    0 6px 20px rgba(0, 0, 0, 0.3),
     0 0 0 1px rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   cursor: zoom-in;
+  object-fit: contain;
+  display: block;
 }
 
 .preview-image:hover, .result-image:hover {
   transform: scale(1.02);
   box-shadow: 
-    0 12px 35px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(0, 212, 255, 0.2);
+    0 10px 30px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(0, 212, 255, 0.2);
 }
 
 /* Buttons */
 .button-row {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .detect-button, .reset-button {
-  padding: 0.875rem 2rem;
+  padding: 0.875rem 1.5rem;
   border: none;
-  border-radius: 12px;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -275,7 +293,12 @@ input[type="file"] {
   overflow: hidden;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  min-width: 140px;
+  min-width: 120px;
+  min-height: 44px; /* iOS touch target minimum */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .detect-button {
@@ -298,10 +321,10 @@ input[type="file"] {
 }
 
 .detect-button:hover:not(:disabled) {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 
-    0 8px 25px rgba(0, 212, 255, 0.4),
-    0 0 20px rgba(0, 212, 255, 0.3);
+    0 6px 20px rgba(0, 212, 255, 0.4),
+    0 0 15px rgba(0, 212, 255, 0.3);
 }
 
 .detect-button:hover:not(:disabled)::before {
@@ -325,29 +348,29 @@ input[type="file"] {
 .reset-button:hover {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.2) 100%);
   border-color: rgba(239, 68, 68, 0.5);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.2);
 }
 
 /* Loading Animation */
 .loading-container {
   text-align: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 150px;
 }
 
 .loading-spinner {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border: 3px solid rgba(0, 212, 255, 0.1);
   border-top: 3px solid #00d4ff;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
 }
 
@@ -359,8 +382,10 @@ input[type="file"] {
 .loading-container div:last-child {
   color: #00d4ff;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
   animation: pulse 2s ease-in-out infinite;
+  text-align: center;
+  word-wrap: break-word;
 }
 
 @keyframes pulse {
@@ -373,28 +398,33 @@ input[type="file"] {
   background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(185, 28, 28, 0.05) 100%);
   color: #fca5a5;
   border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
   margin: 1rem 0;
   text-align: center;
   backdrop-filter: blur(10px);
   animation: slideIn 0.3s ease-out;
+  font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 .success-message {
   background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(21, 128, 61, 0.05) 100%);
-  color: #22c55e; /* NEW: brighter green for visibility */
+  color: #22c55e;
   border: 1px solid rgba(34, 197, 94, 0.3);
-  border-radius: 12px;
-  padding: 1rem 1.5rem;
-  margin: 1rem 0 0 0; /* NEW: margin only on top */
+  border-radius: 10px;
+  padding: 0.875rem 1rem;
+  margin: 1rem 0 0 0;
   text-align: center;
   backdrop-filter: blur(10px);
   animation: slideIn 0.3s ease-out;
-  font-weight: 600; /* NEW: bolder text */
-  font-size: 1.1rem; /* NEW: slightly larger */
-  width: 100%; /* NEW: take full width of card */
-  max-width: 400px; /* NEW: limit width for aesthetics */
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  line-height: 1.4;
 }
 
 @keyframes slideIn {
@@ -415,20 +445,22 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   height: 100%;
-  min-height: 200px;
+  min-height: 150px;
   color: #71717a;
   text-align: center;
+  padding: 1rem;
 }
 
 .empty-state .empty-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 0.75rem;
   opacity: 0.5;
 }
 
 .empty-state .empty-text {
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
   font-weight: 500;
+  word-wrap: break-word;
 }
 
 /* Footer */
@@ -437,15 +469,19 @@ input[type="file"] {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: #71717a;
   text-align: center;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
+  padding: 1.5rem 1rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
   backdrop-filter: blur(20px);
+  word-wrap: break-word;
+  line-height: 1.5;
 }
+
 .App-footer a {
   color: #00d4ff;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
+  word-break: break-all;
 }
 
 .App-footer a:hover {
@@ -467,42 +503,47 @@ input[type="file"] {
   align-items: center;
   justify-content: center;
   animation: fadeIn 0.3s ease-out;
+  padding: 1rem;
 }
 
 .fullscreen-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 12px;
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
   box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.5),
-    0 0 40px rgba(0, 212, 255, 0.2);
+    0 15px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(0, 212, 255, 0.2);
+  object-fit: contain;
 }
 
 .fullscreen-close {
   position: absolute;
-  top: 2rem;
-  right: 2rem;
-  font-size: 2rem;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
   color: #e4e4e7;
   cursor: pointer;
   z-index: 1100;
   background: rgba(24, 24, 27, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  min-height: 44px; /* iOS touch target minimum */
 }
 
 .fullscreen-close:hover {
   background: rgba(0, 212, 255, 0.2);
   border-color: rgba(0, 212, 255, 0.5);
   color: #00d4ff;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 @keyframes fadeIn {
@@ -510,123 +551,224 @@ input[type="file"] {
   to { opacity: 1; }
 }
 
-/* Responsive Design */
+.centered-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+/* Tablet Responsive Design */
 @media (max-width: 1024px) {
   .card-container {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
     max-width: 600px;
   }
   
   .App-header {
-    padding: 3rem 1rem 2rem 1rem;
+    padding: 2rem 1rem 1.5rem 1rem;
   }
   
   .card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .App-header h1 {
-    font-size: 2.5rem;
-  }
-  
-  .App-header p {
-    font-size: 1rem;
+    padding: 1.25rem;
+    min-height: 300px;
   }
   
   .drop-area {
-    padding: 2rem 1rem;
-    min-height: 150px;
+    min-height: 140px;
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 1.5rem 1rem 1rem 1rem;
+  }
+  
+  .App-main {
+    padding: 0.75rem;
+  }
+  
+  .card-container {
+    gap: 1rem;
+    max-width: 100%;
+  }
+  
+  .card {
+    padding: 1rem;
+    min-height: 280px;
+    border-radius: 12px;
+  }
+  
+  .drop-area {
+    padding: 1.25rem 0.75rem;
+    min-height: 120px;
+    border-radius: 10px;
   }
   
   .button-row {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
   }
   
   .detect-button, .reset-button {
     width: 100%;
-    max-width: 200px;
+    max-width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+  }
+  
+  .preview-image, .result-image {
+    max-height: 200px;
+    border-radius: 8px;
   }
   
   .fullscreen-close {
-    top: 1rem;
-    right: 1rem;
+    top: 0.75rem;
+    right: 0.75rem;
     width: 40px;
     height: 40px;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 }
 
-@media (max-width: 480px) {
+/* iPhone XS and similar devices (375px) */
+@media (max-width: 375px) {
+  .App {
+    /* Additional safe area padding for notched devices */
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+  
+  .App-header {
+    padding: 1rem 0.75rem 0.75rem 0.75rem;
+  }
+  
   .App-main {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
   }
+  
   .card-container {
-    align-items: stretch;
+    gap: 0.75rem;
   }
+  
   .card {
-    padding: 0.7rem;
+    padding: 0.875rem;
+    min-height: 260px;
     border-radius: 10px;
-    min-height: 350px;
-    padding-bottom: 2.5rem;
-    box-sizing: border-box;
   }
+  
   .card-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     padding: 0.3rem 0.6rem;
+    margin-bottom: 0.75rem;
   }
+  
   .drop-area {
     padding: 1rem 0.5rem;
+    min-height: 100px;
+    border-radius: 8px;
+  }
+  
+  .drop-area .upload-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .preview-image, .result-image {
+    max-height: 160px;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+  }
+  
+  .button-row {
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .detect-button, .reset-button {
+    padding: 0.875rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    min-height: 44px;
+  }
+  
+  .success-message, .error-message {
+    padding: 0.75rem 0.5rem;
+    margin: 0.75rem 0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  
+  .loading-container {
+    padding: 1.5rem 0;
     min-height: 120px;
   }
-  .drop-area .upload-icon {
-    font-size: 1.5rem;
+  
+  .loading-spinner {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 0.75rem;
   }
-  .preview-image, .result-image {
-    max-width: 90vw;
-    max-height: 40vh;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: 0.5rem auto;
-    border-radius: 8px;
+  
+  .empty-state {
+    min-height: 120px;
+    padding: 0.75rem;
   }
-  .button-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.7rem;
-    margin-top: 1.2rem;
-    margin-bottom: 0.7rem;
-  }
-  .detect-button, .reset-button {
-    width: 100%;
-    max-width: 100%;
-    font-size: 0.95rem;
-    padding: 0.7rem 0;
-    border-radius: 8px;
-  }
-  .success-message {
-    font-size: 0.95rem;
-    margin: 1rem 0 0.5rem 0;
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 8px;
-    padding: 0.7rem 0.5rem;
-  }
-  .error-message {
-    font-size: 0.95rem;
-    border-radius: 8px;
-    padding: 0.7rem 0.5rem;
-  }
+  
   .empty-state .empty-icon {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
   }
-  .empty-state .empty-text {
-    font-size: 0.95rem;
+  
+  .App-footer {
+    padding: 1rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .fullscreen-close {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+  }
+  
+  .fullscreen-img {
+    max-width: 92vw;
+    max-height: 92vh;
+    border-radius: 8px;
+  }
+}
+
+/* Landscape orientation adjustments for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .App-header {
+    padding: 1rem 1rem 0.75rem 1rem;
+  }
+  
+  .App-header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .card {
+    min-height: 240px;
+  }
+  
+  .drop-area {
+    min-height: 100px;
+    padding: 1rem 0.75rem;
+  }
+  
+  .preview-image, .result-image {
+    max-height: 140px;
   }
 }
 
@@ -661,11 +803,28 @@ input[type="file"] {
   }
 }
 
-.centered-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex: 1; /* NEW: fill available space in card */
-  width: 100%;
+/* Ensure text remains readable on all backgrounds */
+@media (max-width: 768px) {
+  .App-header h1,
+  .App-header p,
+  .card-title,
+  .drop-area .upload-text,
+  .drop-area .upload-subtext,
+  .empty-state .empty-text,
+  .success-message,
+  .error-message,
+  .loading-container div:last-child {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+.App, .App-main, .card-container, .card {
+  max-width: 100%;
+  overflow-x: hidden;
 }
