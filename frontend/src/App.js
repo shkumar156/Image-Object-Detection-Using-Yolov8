@@ -109,10 +109,9 @@ function App() {
                 <img src={previewUrl} alt="Preview" className="preview-image" />
               ) : (
                 <>
-                  <div style={{fontSize: '2.5rem', marginBottom: '0.5rem'}}>&#8682;</div>
-                  <div>Drop Image Here</div>
-                  <div style={{color:'#6c7ae0', margin: '0.5rem 0'}}>- or -</div>
-                  <div>Click to Upload</div>
+                  <div className="upload-icon">📁</div>
+                  <div className="upload-text">Drop Image Here</div>
+                  <div className="upload-subtext">or click to browse files</div>
                 </>
               )}
               <input
@@ -155,13 +154,12 @@ function App() {
                 src={detectionResult.detectedImage}
                 alt="Detected"
                 className="result-image"
-                style={{cursor:'zoom-in'}}
                 onClick={() => openFullscreen(detectionResult.detectedImage)}
               />
             ) : (
-              <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',height:'100%'}}>
-                <div style={{fontSize:'2.5rem',marginBottom:'0.5rem'}}>&#128247;</div>
-                <div style={{color:'#6c7ae0'}}>No result yet</div>
+              <div className="empty-state">
+                <div className="empty-icon">🔍</div>
+                <div className="empty-text">No result yet</div>
               </div>
             )}
             {detectionResult && detectionResult.message && (
