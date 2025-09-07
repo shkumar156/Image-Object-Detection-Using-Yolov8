@@ -10,12 +10,7 @@ Achieved real-time object detection on images using the advanced YOLOv8 model wi
 
 ---
 
-## 🔗 Live Demo
 
-- 🌐 Frontend: [[https://your-frontend-site.com](https://image-object-detection-using-yolov8.vercel.app/)]([https://your-frontend-site.com](https://image-object-detection-using-yolov8.vercel.app/))  
-- 🔧 Backend API: [[https://your-backend-api.com](https://huggingface.co/spaces/shkumar156/Backend-Object-Detection)]([https://your-backend-api.com](https://huggingface.co/spaces/shkumar156/Backend-Object-Detection))
-
----
 
 ## 🚀 Features
 
